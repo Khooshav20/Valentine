@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine? 💖</title>
+
+<!-- Romantic Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Initial Card */
+.container {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    color: white;
+    max-width: 500px;
+    z-index: 2;
+}
+
+h1 {
+    font-size: 2.3rem;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid white;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background: white;
+    color: #ff4e6a;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #ff4e6a;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Floating background hearts */
+.heart-bg {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(45deg);
+    animation: float 6s infinite ease-in-out;
+}
+
+.heart-bg::before,
+.heart-bg::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart-bg::before { top: -10px; left: 0; }
+.heart-bg::after { left: -10px; top: 0; }
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Big Heart Wrapper */
+.heart-wrapper {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: beat 1s infinite;
+}
+
+/* Heart Shape */
+.heart-shape {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: red;
+    transform: rotate(45deg);
+}
+
+.heart-shape::before,
+.heart-shape::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart-shape::before {
+    top: -110px;
+    left: 0;
+}
+
+.heart-shape::after {
+    left: -110px;
+    top: 0;
+}
+
+@keyframes beat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Text Inside Heart */
+.heart-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 200px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.main-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    color: white;
+    text-shadow: 0 0 15px rgba(255,255,255,0.9),
+                 0 0 30px rgba(255,0,100,0.7);
+    margin-bottom: 10px;
+    animation: floatText 3s ease-in-out infinite;
+}
+
+.sub-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: white;
+    opacity: 0.95;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatText {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will You Be My Valentine? 💕</h1>
+
+    <!-- Replace with your image filename -->
+    <img src="IMG_5815.jpeg" alt="Our Picture">
+
+    <div class="buttons">
+        <button onclick="sayYes()">Yes 💖</button>
+        <button onclick="sayYes()">Yes (Obviously 😌)</button>
+    </div>
+</div>
+
+<audio id="romanticMusic" src="romantic-music.mp3"></audio>
+
+<script>
+
+/* Floating background hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart-bg");
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+
+/* Confetti */
+function launchConfetti() {
+    const colors = ["#ff0","#ff4e6a","#00f","#0f0","#fff"];
+    for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+function sayYes() {
+    document.getElementById("romanticMusic").play();
+    launchConfetti();
+
+    document.body.innerHTML = "";
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("heart-wrapper");
+
+    wrapper.innerHTML = `
+        <div class="heart-shape"></div>
+        <div class="heart-text">
+            <div class="main-text">Mi Bubalu 💖</div>
+            <div class="sub-text">I Love You Forever ❤️</div>
+        </div>
+    `;
+
+    document.body.appendChild(wrapper);
+}
+
+</script>
+
+</body>
+</html>
